@@ -1,0 +1,35 @@
+var money_num = 0;
+var games = 0;
+
+setScreen("begin");
+  onEvent("buttonStart", "click", function( ) {
+    setScreen("screen1");
+});
+function updateScreen(){
+  setProperty("textarea", "font-size", 25);
+  setProperty("amount", "text", "$" + money_num);
+  if (money_num <= 0){
+    setProperty("textarea", "text","You have " + games + " games " + "and no more money");
+  } else {
+    setProperty("textarea", "text","You have " + games + " games " + "and $" + money_num +" left");
+  }
+}
+onEvent("MoneyInput", "input", function( ) {
+  money_num = getNumber("MoneyInput");
+  updateScreen();
+});
+onEvent("SmallGame", "click", function( ){
+  games = games + 1;
+  money_num = money_num - 10;
+  updateScreen();
+});
+onEvent("AAinput", "click", function( ){
+  games = games + 1;
+  money_num = money_num - 30;
+  updateScreen();
+});
+onEvent("AAAInput", "click", function( ){
+  games = games + 1;
+  money_num = money_num - 60;
+  updateScreen();
+});
